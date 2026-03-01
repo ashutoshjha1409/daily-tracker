@@ -1,47 +1,23 @@
 import Dexie, { Table } from 'dexie'
-import {
-  CorrectionEntry,
-  DailyExecutionRecord,
-  Habit,
-  Project,
-  Task,
-  UserSettings,
-  WeeklyReport
-} from './models'
+import type { Task, Completion } from './models'
 
-export class ExecutionLedgerDB extends Dexie {
+export class TrackerDB extends Dexie {
   tasks!: Table<Task, string>
-  projects!: Table<Project, string>
-  habits!: Table<Habit, string>
-  dailyRecords!: Table<DailyExecutionRecord, string>
-  weeklyReports!: Table<WeeklyReport, string>
-  settings!: Table<UserSettings & { id: string }, string>
-  corrections!: Table<CorrectionEntry, string>
+  completions!: Table<Completion, [string, string]>
 
   constructor() {
-    super('DailyExecutionLedger')
+    super('DailyTaskTracker')
     this.version(1).stores({
-      tasks: '&id,scheduledDate,context',
-      projects: '&id,active',
-      habits: '&id',
-      dailyRecords: '&date,disciplineScore',
-      weeklyReports: '&weekRange',
-      settings: 'id',
-      corrections: '&id,date'
+      tasks: '&id,order',
+      completions: '&[taskId+date],taskId,date'
     })
   }
 }
 
-let executionDb: ExecutionLedgerDB | null = null
+let db: TrackerDB | null = null
 
-export function getExecutionDb() {
-  if (typeof window === 'undefined') {
-    return null
-  }
-
-  if (!executionDb) {
-    executionDb = new ExecutionLedgerDB()
-  }
-
-  return executionDb
+export function getDb(): TrackerDB | null {
+  if (typeof window === 'undefined') return null
+  if (!db) db = new TrackerDB()
+  return db
 }
