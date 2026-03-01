@@ -41,15 +41,17 @@ Serves the built app on port 3000. Requires Node on the machine where you run it
 
 ### Option 3: GitHub Pages
 
-This repo is set up to deploy to **GitHub Pages** via GitHub Actions:
+This repo deploys to **GitHub Pages** by pushing the build to the `gh-pages` branch:
 
-1. **Enable Pages in the repo:**  
-   GitHub → your repo → **Settings** → **Pages** → under **Build and deployment**, set **Source** to **GitHub Actions**.
+1. **First run:** Push to `main` (or `master`). The workflow will build and push the site to the `gh-pages` branch.
 
-2. Push to `main` (or `master`). The workflow builds the app and deploys the `out/` folder. The site will be at:
+2. **Enable Pages:**  
+   GitHub → your repo → **Settings** → **Pages** → under **Build and deployment**, set **Source** to **Deploy from a branch**. Choose branch **gh-pages**, folder **/ (root)**, then **Save**.
+
+3. After a minute or two, the site will be at:  
    **https://ashutoshjha1409.github.io/daily-tracker/**
 
-3. To redeploy, push any change to the default branch or run the workflow manually: **Actions** → **Deploy to GitHub Pages** → **Run workflow**.
+4. To redeploy, push any change to `main`/`master` or run the workflow manually: **Actions** → **Deploy to GitHub Pages** → **Run workflow**.
 
 ### Option 4: Other hosts
 
