@@ -39,6 +39,18 @@ npm run start
 
 Serves the built app on port 3000. Requires Node on the machine where you run it.
 
-### Option 3: Deploy somewhere
+### Option 3: GitHub Pages
 
-Upload the contents of **`out/`** to any static host (e.g. Vercel, Netlify, GitHub Pages, or a simple web server). No server-side code is required; data is stored in the browser (IndexedDB and localStorage).
+This repo is set up to deploy to **GitHub Pages** via GitHub Actions:
+
+1. **Enable Pages in the repo:**  
+   GitHub → your repo → **Settings** → **Pages** → under **Build and deployment**, set **Source** to **GitHub Actions**.
+
+2. Push to `main` (or `master`). The workflow builds the app and deploys the `out/` folder. The site will be at:
+   **https://ashutoshjha1409.github.io/daily-tracker/**
+
+3. To redeploy, push any change to the default branch or run the workflow manually: **Actions** → **Deploy to GitHub Pages** → **Run workflow**.
+
+### Option 4: Other hosts
+
+Upload the contents of **`out/`** to any static host (e.g. Vercel, Netlify, or a simple web server). No server-side code is required; data is stored in the browser (IndexedDB and localStorage).
